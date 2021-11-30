@@ -8,85 +8,57 @@
 import Foundation
 import UIKit
 
-class Database {
-    
-    static let takingMedicationUpdatedNotification = NSNotification.Name("gloria.TakingMedication.MedicationUpdated")
 
-    static let shared = Database()
-        
-    private func loadPersons() -> [UUID:Person]? {
-        var persons = [UUID:Person]()
-        
-        do {
-            let storageDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let storageURL = storageDirectory.appendingPathComponent("personsMedication").appendingPathExtension("json")
-            let fileData = try Data(contentsOf: storageURL)
-            let personsArray = try JSONDecoder().decode([Person].self, from: fileData)
-            persons = personsArray.reduce(into: persons) { partial, person in
-                partial[person.id] = person
-            }
-        } catch {
-            return nil
-        }
-        
-        return persons
-    }
-    
-    private func savePersonsMedication(_ persons: [UUID:Person]) {
-        do {
-            let storageDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let storageURL = storageDirectory.appendingPathComponent("personMedication").appendingPathExtension("json")
-            let fileData = try JSONEncoder().encode(Array(persons.values))
-            try fileData.write(to: storageURL)
-        } catch {
-            fatalError("There was a problem saving person Medication. Error: \(error)")
-        }
-    }
-    
-    private var _personsOptional: [UUID:Person]?
-    private var _personsLookup: [UUID:Person] {
-        get {
-            if _personsOptional == nil {
-                _personsOptional = loadPersons() ?? [:]
-            }
-            
-            return _personsOptional!
-        }
-        set {
-            _personsOptional = newValue
-        }
-    }
-    
-    var persons: [Person] {
-        get {
-            return Array(_personsLookup.values.sorted(by: <))
-        }
-    }
-    
-    func addBill() -> Bill {
-        let bill = Bill()
-        _billsLookup[bill.id] = bill
-        return bill
-    }
-    
-    func updateAndSave(_ bill: Bill) {
-        _billsLookup[bill.id] = bill
-        save()
-        NotificationCenter.default.post(name: Self.billUpdatedNotification, object: nil)
-    }
-        
-    func save() {
-        saveBills(_billsLookup)
-    }
-    
-    func delete(bill: Bill) {
-        _billsLookup[bill.id] = nil
-    }
-    
-    func getBill(withID id: UUID) -> Bill? {
-        return _billsLookup[id]
-    }
-    
+struct Profile {
+    var name: String
 }
 
+struct Medication {
+    var name: String
 }
+
+struct TakingsOfMedication {
+    var profile: Profile
+    var medicationName: Medication
+    var date: String
+    var hour: String
+    var quantity: Double
+}
+
+var profiles: [Profile] = [Profile(name: "gloria")]
+
+var medicationNames: [Medication] = [Medication(name: "Sintrom"),
+                                     Medication(name: "Trankimacin")]
+
+var takingDaysAndQauntity: [TakingsOfMedication] = [TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[0], date: "30/11/2021", hour: "21:00", quantity: 0.5),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[0], date: "01/12/2021", hour: "21:00", quantity: 0.75),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[0], date: "02/12/2021", hour: "21:00", quantity: 0.75),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[0], date: "03/12/2021", hour: "21:00", quantity: 0.5),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[1], date: "30/11/2021", hour: "21:00", quantity: 1.5),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[1], date: "01/12/2021", hour: "21:00", quantity: 1.5),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[1], date: "02/12/2021", hour: "21:00", quantity: 1.5),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[1], date: "03/12/2021", hour: "21:00", quantity: 1.5),
+                                                    TakingsOfMedication(profile: profiles[0], medicationName: medicationNames[1], date: "04/12/2021", hour: "21:00", quantity: 1.5)
+                                                   ]
+
+//var takingDaysAndQauntity = [["30/11/2021 21:00", "0.5"],
+//                             ["01/12/2021 21:00", "0.75"],
+//                             ["02/12/2021 21:00", "0,75"],
+//                             ["03/12/2021 21:00", "0.5"]
+//                            ]]
+//
+//
+//
+//var tomas = [
+//    ["gloria", ["Sintrom", [["30/11/2021 21:00", "0.5"],
+//                            ["01/12/2021 21:00", "0.75"],
+//                            ["02/12/2021 21:00", "0,75"],
+//                            ["03/12/2021 21:00", "0.5"]
+//                           ]],
+//                ["Trankimancin", [["30/11/2021 21:00", "1.5"],
+//                                  ["01/12/2021 21:00", "1.5"],
+//                                  ["02/12/2021 21:00", "1.5"],
+//                                  ["03/12/2021 21:00", "1.5"]
+//                                 ]]
+//    ]
+//]
