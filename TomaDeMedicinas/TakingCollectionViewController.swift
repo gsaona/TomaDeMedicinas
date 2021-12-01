@@ -14,6 +14,12 @@ class TakingCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.setCollectionViewLayout(generateLayout(), animated: false)
+        
+        if let loadData = TakingsOfMedication.loadData() {
+            items = loadData
+        } else {
+            items = TakingsOfMedication.sampleTaking()
+        }
     }
     
     private func generateLayout() -> UICollectionViewLayout {
@@ -42,18 +48,18 @@ class TakingCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Tomas contador: \(takingDaysAndQauntity.count)")
-        return takingDaysAndQauntity.count
+        print("Tomas contador: \(items.count)")
+        return items.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TakingCollectionViewCell
-        print(takingDaysAndQauntity[indexPath.item].date)
-        cell.profileNameLabel.text = takingDaysAndQauntity[indexPath.item].profile.name.uppercased()
-        cell.medicationNameLabel.text = takingDaysAndQauntity[indexPath.item].medicationName.name.uppercased()
-        cell.dateLabel.text = takingDaysAndQauntity[indexPath.item].date
-        cell.hourLabel.text = takingDaysAndQauntity[indexPath.item].hour
-        cell.quantity.text = String(takingDaysAndQauntity[indexPath.item].quantity)
+        print(items[indexPath.item].date)
+        cell.profileNameLabel.text = items[indexPath.item].profile.name.uppercased()
+        cell.medicationNameLabel.text = items[indexPath.item].medicationName.name.uppercased()
+        cell.dateLabel.text = items[indexPath.item].date
+        cell.hourLabel.text = items[indexPath.item].hour
+        cell.quantity.text = String(items[indexPath.item].quantity)
         return cell
     }
 
