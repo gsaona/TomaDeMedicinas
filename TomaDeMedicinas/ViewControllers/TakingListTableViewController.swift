@@ -57,6 +57,7 @@ class TakingListTableViewController: UITableViewController {
             guard let taking = self.dataSource.itemIdentifier(for: indexPath) else { return }
             Database.shared.delete(taking: taking)
             Database.shared.save()
+            self.updateSnapshot()
             completationHandler(true)
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
