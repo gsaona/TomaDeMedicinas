@@ -7,14 +7,19 @@
 
 import Foundation
 
-struct Profile: Equatable, Codable {
+struct Profile: Equatable, Codable, Comparable {
     let id = UUID()
     var name: String
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    static func <(lhs: Profile, rhs: Profile) -> Bool {
+        return lhs.name < rhs.name
+    }
 }
 
-var profiles: [Profile] = [Profile(name: "gloria")]
+var profiles: [Profile] = [Profile(name: "gloria"),
+                           Profile(name: "laia")]
 

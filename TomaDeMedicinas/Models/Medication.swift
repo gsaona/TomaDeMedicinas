@@ -8,12 +8,16 @@
 import Foundation
 
 
-struct Medication: Equatable, Codable {
+struct Medication: Equatable, Codable, Comparable {
     let id = UUID()
     var name: String
     
     static func ==(lhs: Medication, rhs: Medication) -> Bool {
         return lhs.id == rhs.id
+    }
+    
+    static func <(lhs: Medication, rhs: Medication) -> Bool {
+        return lhs.name < rhs.name
     }
 }
 
@@ -21,4 +25,5 @@ extension Medication: Hashable {
     
 }
 var medicationNames: [Medication] = [Medication(name: "Sintrom"),
-                                     Medication(name: "Trankimacin")]
+                                     Medication(name: "Trankimacin"),
+                                     Medication(name: "Salbutamol")]
