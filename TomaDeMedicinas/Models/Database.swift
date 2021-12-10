@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class Database {
+    
+    static let takingUpdatedNotification = NSNotification.Name("gloria.TomaDeMedicinas.takingUpdated")
+
     static let shared = Database()
     
     static func loadData() -> [UUID:Taking]? {
@@ -61,7 +64,7 @@ class Database {
     func updateAndSave(_ taking: Taking) {
         takingsLookup[taking.id] = taking
         save()
-        
+        NotificationCenter.default.post(name: Self.takingUpdatedNotification, object: nil)
     }
     
     func save() {

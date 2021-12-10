@@ -10,7 +10,7 @@ import CoreData
 
 private class SwipeableDataSource: UITableViewDiffableDataSource<Int,Taking> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 }
 
@@ -20,23 +20,27 @@ class TakingListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         navigationItem.leftBarButtonItem = editButtonItem
         
         dataSource = SwipeableDataSource(tableView: tableView) {
             tableView, indexPath, taking in
-            
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "takingListCell", for: indexPath)
-            var taking = Database.shared.takings[indexPath.row]
-            
+            let taking = Database.shared.takings[indexPath.row]
+
             cell.textLabel?.text = taking.profile
             cell.detailTextLabel?.text = taking.medicationName
             return cell
         }
-        
+
         tableView.dataSource = dataSource
-        
+
         updateSnapshot()
+
+        NotificationCenter.default.addObserver(forName: Database.takingUpdatedNotification, object: nil, queue: nil)
+        { _ in
+            self.updateSnapshot()
+        }
     }
 
     // MARK: - Table view data source

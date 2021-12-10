@@ -57,6 +57,7 @@ class TakingDetailTableViewController: UITableViewController {
             updateTakingDatePickerUI()
             navigationItem.leftBarButtonItem = nil
         } else {
+            title = "Añadir Toma"
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
         }
         

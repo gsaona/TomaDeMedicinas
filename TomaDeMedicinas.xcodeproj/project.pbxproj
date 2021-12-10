@@ -11,13 +11,13 @@
 		570149F627577D88008CB155 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570149F527577D87008CB155 /* Medication.swift */; };
 		570149FA27591BA6008CB155 /* TakingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570149F927591BA6008CB155 /* TakingDetailTableViewController.swift */; };
 		573D56592744D83000301D43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573D56582744D83000301D43 /* AppDelegate.swift */; };
-		573D565B2744D83000301D43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573D565A2744D83000301D43 /* SceneDelegate.swift */; };
 		573D56602744D83000301D43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 573D565E2744D83000301D43 /* Main.storyboard */; };
 		573D56622744D83100301D43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 573D56612744D83100301D43 /* Assets.xcassets */; };
 		573D56652744D83100301D43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 573D56632744D83100301D43 /* LaunchScreen.storyboard */; };
 		573D56742744DD6500301D43 /* Taking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573D56732744DD6500301D43 /* Taking.swift */; };
 		57715924276214A400A5DF8F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57715923276214A400A5DF8F /* Database.swift */; };
 		5790F4A327622F4E006229D2 /* TakingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790F4A227622F4E006229D2 /* TakingListTableViewController.swift */; };
+		57BF6AB827633B4100599281 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BF6AB727633B4100599281 /* SceneDelegate.swift */; };
 		57F154C0275665EA00F4380A /* TakingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F154BF275665EA00F4380A /* TakingCollectionViewController.swift */; };
 		57F154C22756748700F4380A /* TakingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F154C12756748700F4380A /* TakingCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -28,7 +28,6 @@
 		570149F927591BA6008CB155 /* TakingDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakingDetailTableViewController.swift; sourceTree = "<group>"; };
 		573D56552744D83000301D43 /* TomaDeMedicinas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomaDeMedicinas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		573D56582744D83000301D43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		573D565A2744D83000301D43 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		573D565F2744D83000301D43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		573D56612744D83100301D43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		573D56642744D83100301D43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		573D56732744DD6500301D43 /* Taking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taking.swift; sourceTree = "<group>"; };
 		57715923276214A400A5DF8F /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		5790F4A227622F4E006229D2 /* TakingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakingListTableViewController.swift; sourceTree = "<group>"; };
+		57BF6AB727633B4100599281 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		57F154BF275665EA00F4380A /* TakingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakingCollectionViewController.swift; sourceTree = "<group>"; };
 		57F154C12756748700F4380A /* TakingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakingCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,9 +80,9 @@
 		573D56572744D83000301D43 /* TomaDeMedicinas */ = {
 			isa = PBXGroup;
 			children = (
+				57BF6AB727633B4100599281 /* SceneDelegate.swift */,
 				573D56722744DCFD00301D43 /* Models */,
 				573D56582744D83000301D43 /* AppDelegate.swift */,
-				573D565A2744D83000301D43 /* SceneDelegate.swift */,
 				573D565E2744D83000301D43 /* Main.storyboard */,
 				570149FB27591BB4008CB155 /* ViewControllers */,
 				57F154C12756748700F4380A /* TakingCollectionViewCell.swift */,
@@ -180,11 +180,11 @@
 				57F154C0275665EA00F4380A /* TakingCollectionViewController.swift in Sources */,
 				570149F627577D88008CB155 /* Medication.swift in Sources */,
 				570149F427577D78008CB155 /* Profile.swift in Sources */,
+				57BF6AB827633B4100599281 /* SceneDelegate.swift in Sources */,
 				573D56592744D83000301D43 /* AppDelegate.swift in Sources */,
 				573D56742744DD6500301D43 /* Taking.swift in Sources */,
 				57715924276214A400A5DF8F /* Database.swift in Sources */,
 				57F154C22756748700F4380A /* TakingCollectionViewCell.swift in Sources */,
-				573D565B2744D83000301D43 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
