@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57000837276A0BC900D3DBC0 /* TakeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57000836276A0BC900D3DBC0 /* TakeTableViewCell.swift */; };
 		570149F427577D78008CB155 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570149F327577D78008CB155 /* Profile.swift */; };
 		570149F627577D88008CB155 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570149F527577D87008CB155 /* Medication.swift */; };
 		570149FA27591BA6008CB155 /* TakeDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570149F927591BA6008CB155 /* TakeDetailTableViewController.swift */; };
@@ -21,11 +22,10 @@
 		57810C3E2767706400D35869 /* PatternTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57810C3D2767706400D35869 /* PatternTableViewController.swift */; };
 		5790F4A327622F4E006229D2 /* TakeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790F4A227622F4E006229D2 /* TakeListTableViewController.swift */; };
 		57BF6AB827633B4100599281 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BF6AB727633B4100599281 /* SceneDelegate.swift */; };
-		57F154C0275665EA00F4380A /* TakingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F154BF275665EA00F4380A /* TakingCollectionViewController.swift */; };
-		57F154C22756748700F4380A /* TakingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F154C12756748700F4380A /* TakingCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57000836276A0BC900D3DBC0 /* TakeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTableViewCell.swift; sourceTree = "<group>"; };
 		570149F327577D78008CB155 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		570149F527577D87008CB155 /* Medication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
 		570149F927591BA6008CB155 /* TakeDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -42,8 +42,6 @@
 		57810C3D2767706400D35869 /* PatternTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternTableViewController.swift; sourceTree = "<group>"; };
 		5790F4A227622F4E006229D2 /* TakeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeListTableViewController.swift; sourceTree = "<group>"; };
 		57BF6AB727633B4100599281 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		57F154BF275665EA00F4380A /* TakingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakingCollectionViewController.swift; sourceTree = "<group>"; };
-		57F154C12756748700F4380A /* TakingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakingCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57000835276A0B0500D3DBC0 /* ViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				57000836276A0BC900D3DBC0 /* TakeTableViewCell.swift */,
+			);
+			path = ViewCells;
+			sourceTree = "<group>";
+		};
 		570149FB27591BB4008CB155 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +98,7 @@
 				573D565E2744D83000301D43 /* Main.storyboard */,
 				573D56722744DCFD00301D43 /* Models */,
 				570149FB27591BB4008CB155 /* ViewControllers */,
+				57000835276A0B0500D3DBC0 /* ViewCells */,
 				57810C3827636C4A00D35869 /* To delete */,
 				573D56612744D83100301D43 /* Assets.xcassets */,
 				573D56632744D83100301D43 /* LaunchScreen.storyboard */,
@@ -115,8 +122,6 @@
 		57810C3827636C4A00D35869 /* To delete */ = {
 			isa = PBXGroup;
 			children = (
-				57F154BF275665EA00F4380A /* TakingCollectionViewController.swift */,
-				57F154C12756748700F4380A /* TakingCollectionViewCell.swift */,
 			);
 			path = "To delete";
 			sourceTree = "<group>";
@@ -194,7 +199,6 @@
 			files = (
 				570149FA27591BA6008CB155 /* TakeDetailTableViewController.swift in Sources */,
 				5790F4A327622F4E006229D2 /* TakeListTableViewController.swift in Sources */,
-				57F154C0275665EA00F4380A /* TakingCollectionViewController.swift in Sources */,
 				570149F627577D88008CB155 /* Medication.swift in Sources */,
 				570149F427577D78008CB155 /* Profile.swift in Sources */,
 				57BF6AB827633B4100599281 /* SceneDelegate.swift in Sources */,
@@ -202,9 +206,9 @@
 				5713D2F627679B4100387017 /* PatternTableViewCell.swift in Sources */,
 				57810C3C2766207700D35869 /* Pattern.swift in Sources */,
 				57810C3E2767706400D35869 /* PatternTableViewController.swift in Sources */,
+				57000837276A0BC900D3DBC0 /* TakeTableViewCell.swift in Sources */,
 				573D56742744DD6500301D43 /* Take.swift in Sources */,
 				57715924276214A400A5DF8F /* Database.swift in Sources */,
-				57F154C22756748700F4380A /* TakingCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

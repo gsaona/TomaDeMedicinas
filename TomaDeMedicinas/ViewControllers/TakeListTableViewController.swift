@@ -18,9 +18,6 @@ class TakeListTableViewController: UITableViewController {
     
     fileprivate var dataSource: SwipeableDataSource!
     
-//    static let editNameSegue = "editTake"
-    static let addNameSegue = "addTakes"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
@@ -28,12 +25,16 @@ class TakeListTableViewController: UITableViewController {
         dataSource = SwipeableDataSource(tableView: tableView) {
             tableView, indexPath, taking in
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: "takeListCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "takeListCell", for: indexPath) as! TakeTableViewCell
             let take = Database.shared.takes[indexPath.row]
 
-            cell.textLabel?.text = take.profile
-            cell.detailTextLabel?.text = take.formattedTakeDate
-//            taking.medicationName
+            cell.profileNameLabel.text = take.profile
+            cell.profileNameLabel.text = take.profile
+            cell.medicationNameLabel.text = take.medicationName
+            cell.dateLabel.text = take.formattedTakeDate
+            cell.hourLabel.text = take.formattedTakeTime
+            cell.quantity.text = String(format: "%.2f", take.quantity ?? 0)
+            cell.unit.text = take.unitOfQuantity
             return cell
         }
 
@@ -51,6 +52,7 @@ class TakeListTableViewController: UITableViewController {
     func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Take>()
         snapshot.appendSections([0])
+//        let items = Database.shared.takes
         snapshot.appendItems(Database.shared.takes, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
@@ -69,23 +71,19 @@ class TakeListTableViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        performSegue(withIdentifier: "editTake", sender: indexPath)
-    }
-
     // MARK: - Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let indexPath = sender as? IndexPath, segue.identifier == "editTake" {
-        
-            let navigationController = segue.destination as? UINavigationController
-            let takeDetailTableViewController = navigationController?.viewControllers.first as? TakeDetailTableViewController
-//            takeDetailTableViewController?.take = Database.shared.takes[indexPath.row]
-            takeDetailTableViewController?.take = self.dataSource.itemIdentifier(for: indexPath)
+    @IBSegueAction func addEditTake(_ coder: NSCoder, sender: Any?) -> TakeDetailTableViewController? {
+        if let cell = sender as? UITableViewCell,
+           let indexPath = tableView.indexPath(for: cell) {
+            let takeToEdit = Database.shared.takes[indexPath.row]
+            return TakeDetailTableViewController(coder: coder, take: takeToEdit)
+        } else {
+            return TakeDetailTableViewController(coder: coder, take: nil)
         }
+        
     }
-    
+
     @IBAction func unwindFromTakingDetail(segue: UIStoryboardSegue) {
         
     }

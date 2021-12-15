@@ -24,22 +24,28 @@ struct Take: Equatable, Codable, Comparable {
     static func <(lhs: Take, rhs: Take) -> Bool {
         return lhs.dateTime! < rhs.dateTime!
     }
-    
-    static func sampleTake() -> [Take] {
-        return [Take(profile: profiles[0].name, medicationName: medicationNames[0].name, dateTime: Date.now, quantity: 0.5, unitOfQuantity: "pastilla")
-        ]
-    }
 }
 
 extension Take {
+   
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         return formatter
     }()
     
+    private static let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
     var formattedTakeDate: String {
         return Take.dateFormatter.string(from: self.dateTime!)
+    }
+    
+    var formattedTakeTime: String {
+        return Take.timeFormatter.string(from: self.dateTime!)
     }
 }
 

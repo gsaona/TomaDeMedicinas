@@ -29,17 +29,17 @@ class TakeDetailTableViewController: UITableViewController {
     @IBOutlet var takingIntervalTextField: UITextField!
     
     var take: Take?
-//    var takes: [Take]?
     
-    var isPatternMode: Bool {
-        get {
-            if let _ = take {
-                return false
-            } else {
-                return true
-            }
-        }
+    init?(coder: NSCoder, take: Take?){
+        self.take = take
+        super.init(coder: coder)
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+//    var takes: [Take]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +50,7 @@ class TakeDetailTableViewController: UITableViewController {
         
         takeDatePicker.date = Calendar.current.startOfDay(for: Date())
             
-        print(isPatternMode)
         if let takeToModify = take {
-//        if !isPatternMode {
             title = "Modificar Toma"
             personTextField.text = takeToModify.profile
             medicineNameTextField.text = takeToModify.medicationName

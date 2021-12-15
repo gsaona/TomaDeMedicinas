@@ -12,11 +12,6 @@ class Database {
     
     static let takeUpdatedNotification = NSNotification.Name("gloria.TomaDeMedicinas.takeUpdated")
     
-//    enum pathComponents: String {
-//        case takeOfMedicines
-//        case patternOfMedicines
-//    }
-    
     static let shared = Database()
     
     static func loadTakeData() -> [UUID:Take]? {
@@ -57,8 +52,7 @@ class Database {
     }
     
     var takes: [Take] {
-        get { return Array(takesLookup.values) }
-//        .sorted(by: <))}
+        get { return Array(takesLookup.values.sorted(by: <))}
     }
     
     func addTake() -> Take {
