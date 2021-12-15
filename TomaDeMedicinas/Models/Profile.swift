@@ -20,6 +20,4 @@ struct Profile: Equatable, Codable, Comparable {
     }
 }
 
-var profiles: [Profile] = [Profile(name: "gloria"),
-                           Profile(name: "laia")]
-
+var profiles: [Profile] = [Profile(name: NSUserName())]

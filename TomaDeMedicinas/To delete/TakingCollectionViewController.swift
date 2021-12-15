@@ -8,9 +8,9 @@
 import UIKit
 import CoreData
 
-private let reuseIdentifier = "TakingsByProfileCells"
+private let reuseIdentifier = "TakesByProfileCells"
 
-private class SwipeableDataSource: UITableViewDiffableDataSource<Int, Taking> {
+private class SwipeableDataSource: UITableViewDiffableDataSource<Int, Take> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
@@ -50,18 +50,17 @@ class TakingCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Tomas contador: \(Database.shared.takings.count)")
-        return Database.shared.takings.count
+        print("Tomas contador: \(Database.shared.takes.count)")
+        return Database.shared.takes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TakingCollectionViewCell
-        print(Database.shared.takings[indexPath.item].date!)
-        cell.profileNameLabel.text = Database.shared.takings[indexPath.item].profile!.uppercased()
-        cell.medicationNameLabel.text = Database.shared.takings[indexPath.item].medicationName!.uppercased()
-        cell.dateLabel.text = Database.shared.takings[indexPath.item].formattedTakingDate
-        cell.hourLabel.text = Database.shared.takings[indexPath.item].hour
-        cell.quantity.text = String(Database.shared.takings[indexPath.item].quantity!)
+        cell.profileNameLabel.text = Database.shared.takes[indexPath.item].profile!.uppercased()
+        cell.medicationNameLabel.text = Database.shared.takes[indexPath.item].medicationName!.uppercased()
+//        cell.dateLabel.text = Database.shared.takings[indexPath.item].formattedTakingDate
+//        cell.hourLabel.text = Database.shared.takings[indexPath.item].hour
+        cell.quantity.text = String(Database.shared.takes[indexPath.item].quantity!)
         return cell
     }
     
@@ -70,22 +69,12 @@ class TakingCollectionViewController: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let indexPath = sender as? IndexPath, segue.identifier == "editTakings" {
+        if let indexPath = sender as? IndexPath, segue.identifier == "editTake" {
             let navigationController = segue.destination as? UINavigationController
-            let takingDetailTableViewController = navigationController?.viewControllers.first as? TakingDetailTableViewController
+            let takeDetailTableViewController = navigationController?.viewControllers.first as? TakeDetailTableViewController
 //            var taking = self.takings
 //            takingDetailTableViewController?.taking = Database.shared.items[indexPath.row]
-            takingDetailTableViewController?.taking = Database.shared.takings[indexPath.row]
+            takeDetailTableViewController?.take = Database.shared.takes[indexPath.row]
         }
     }
-    
-    @IBAction func unwindFromAddRegistration(unwindSegue: UIStoryboardSegue) {
-        guard let addTakingController = unwindSegue.source as? TakingDetailTableViewController,
-              let taking = addTakingController.taking else { return }
-        
-        
-        Database.shared.addTaking()
-        collectionView.reloadData()
-    }
-    
 }

@@ -8,15 +8,18 @@
 import UIKit
 import CoreData
 
-private class SwipeableDataSource: UITableViewDiffableDataSource<Int,Taking> {
+private class SwipeableDataSource: UITableViewDiffableDataSource<Int,Take> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
 }
 
-class TakingListTableViewController: UITableViewController {
+class TakeListTableViewController: UITableViewController {
     
     fileprivate var dataSource: SwipeableDataSource!
+    
+//    static let editNameSegue = "editTake"
+    static let addNameSegue = "addTakes"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +28,12 @@ class TakingListTableViewController: UITableViewController {
         dataSource = SwipeableDataSource(tableView: tableView) {
             tableView, indexPath, taking in
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: "takingListCell", for: indexPath)
-            let taking = Database.shared.takings[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "takeListCell", for: indexPath)
+            let take = Database.shared.takes[indexPath.row]
 
-            cell.textLabel?.text = taking.profile
-            cell.detailTextLabel?.text = taking.medicationName
+            cell.textLabel?.text = take.profile
+            cell.detailTextLabel?.text = take.formattedTakeDate
+//            taking.medicationName
             return cell
         }
 
@@ -37,7 +41,7 @@ class TakingListTableViewController: UITableViewController {
 
         updateSnapshot()
 
-        NotificationCenter.default.addObserver(forName: Database.takingUpdatedNotification, object: nil, queue: nil)
+        NotificationCenter.default.addObserver(forName: Database.takeUpdatedNotification, object: nil, queue: nil)
         { _ in
             self.updateSnapshot()
         }
@@ -45,17 +49,17 @@ class TakingListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     func updateSnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Taking>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Take>()
         snapshot.appendSections([0])
-        snapshot.appendItems(Database.shared.takings, toSection: 0)
+        snapshot.appendItems(Database.shared.takes, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             contextualAction, view, completationHandler in
-            guard let taking = self.dataSource.itemIdentifier(for: indexPath) else { return }
-            Database.shared.delete(taking: taking)
+            guard let takeToDelete = self.dataSource.itemIdentifier(for: indexPath) else { return }
+            Database.shared.delete(take: takeToDelete)
             Database.shared.save()
             self.updateSnapshot()
             completationHandler(true)
@@ -66,20 +70,24 @@ class TakingListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        performSegue(withIdentifier: "editTakings", sender: indexPath)
+        performSegue(withIdentifier: "editTake", sender: indexPath)
     }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let indexPath = sender as? IndexPath, segue.identifier == "editTakings" {
-            
+        
+        if let indexPath = sender as? IndexPath, segue.identifier == "editTake" {
+        
             let navigationController = segue.destination as? UINavigationController
-            let takingDetailTableViewController = navigationController?.viewControllers.first as? TakingDetailTableViewController
-            takingDetailTableViewController?.taking = Database.shared.takings[indexPath.row]
+            let takeDetailTableViewController = navigationController?.viewControllers.first as? TakeDetailTableViewController
+//            takeDetailTableViewController?.take = Database.shared.takes[indexPath.row]
+            takeDetailTableViewController?.take = self.dataSource.itemIdentifier(for: indexPath)
         }
     }
     
-    @IBAction func unwindFromTakingDetail(segue: UIStoryboardSegue) {}
+    @IBAction func unwindFromTakingDetail(segue: UIStoryboardSegue) {
+        
+    }
 
 }
